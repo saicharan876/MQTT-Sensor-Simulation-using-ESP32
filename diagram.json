@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "author": "Anonymous maker",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": -9.6, "left": 52.84, "attrs": {} },
+    { "type": "wokwi-photoresistor", "id": "photo1", "top": 30, "left": -100, "attrs": {} },
+    {
+      "type": "resistor",
+      "id": "res1",
+      "top": 30,
+      "left": -60,
+      "attrs": { "resistance": "100k" }
+    },
+    { "type": "wokwi-lm35", "id": "lm35", "top": -20, "left": 50, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -1.2,
+      "left": 189,
+      "rotate": 90,
+      "attrs": { "color": "yellow" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": 27.6,
+      "left": 198.6,
+      "rotate": 90,
+      "attrs": { "color": "red" }
+    },
+    { "type": "resistor", "id": "res2", "top": 80, "left": -50, "attrs": { "resistance": "330" } },
+    { "type": "resistor", "id": "res3", "top": 80, "left": -20, "attrs": { "resistance": "330" } },
+    { "type": "wokwi-photoresistor-sensor", "id": "ldr1", "top": 99.2, "left": -172, "attrs": {} },
+    {
+      "type": "wokwi-ntc-temperature-sensor",
+      "id": "ntc1",
+      "top": 12.2,
+      "left": -163.8,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:3V3", "photo1:1", "", [] ],
+    [ "photo1:2", "res1:1", "", [] ],
+    [ "res1:2", "esp:GND", "", [] ],
+    [ "photo1:2", "esp:GPIO34", "", [] ],
+    [ "esp:3V3", "lm35:VCC", "", [] ],
+    [ "esp:GND", "lm35:GND", "", [] ],
+    [ "lm35:OUT", "esp:GPIO35", "", [] ],
+    [ "esp:GPIO23", "res2:1", "", [] ],
+    [ "res2:2", "led1:A", "", [] ],
+    [ "led1:K", "esp:GND", "", [] ],
+    [ "esp:GPIO22", "res3:1", "", [] ],
+    [ "res3:2", "led2:A", "", [] ],
+    [ "led2:K", "esp:GND", "", [] ],
+    [ "ntc1:OUT", "esp:34", "green", [ "h0" ] ],
+    [ "ldr1:AO", "esp:35", "green", [ "h0" ] ],
+    [ "ldr1:VCC", "esp:3V3", "red", [ "h0" ] ],
+    [ "ldr1:GND", "esp:GND.2", "black", [ "h0" ] ],
+    [ "ntc1:GND", "esp:GND.2", "black", [ "h0" ] ],
+    [ "ntc1:VCC", "esp:3V3", "red", [ "h0" ] ],
+    [ "led1:A", "esp:23", "green", [ "h-19.2", "v-9.6" ] ],
+    [ "led2:A", "esp:22", "green", [ "h0" ] ],
+    [ "led2:C", "esp:GND.3", "green", [ "h0" ] ],
+    [ "led1:C", "esp:GND.3", "green", [ "h0" ] ]
+  ],
+  "dependencies": {}
+}
